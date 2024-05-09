@@ -24,7 +24,7 @@ public class ListCollectionExample {
         for (int i = 0; i < next; i++) {
             System.out.println("Enter the name of the student.");
             System.out.print("> ");
-            String name = scanner.next();
+            String name = scanner.next();       // nextLine()과의 차이점 기억해두기!
             System.out.println("Enter the age of the student.");
             System.out.print("> ");
             int age = scanner.nextInt();

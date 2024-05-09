@@ -1,5 +1,7 @@
 package kr.easw.lesson07;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -32,6 +34,15 @@ public class ScoreCalculatorWithList {
         System.out.printf("Subject Counts: %d; Average: %.2f; ", calculator.getSubjectCount(), calculator.getAverage());
     }
 
+    /*
+        **반드시** CalculatorImpl 클래스만 수정하여 문제를 풀어야 합니다.
+        *
+        * 해당 문제는 다음과 같은 제한 사항이 있습니다 :
+        * - CalculatorImpl 클래스는 Calculator 인터페이스를 구현해야 합니다.
+        * - CalculatorImpl 클래스는 List를 반드시 사용해야 합니다.
+        * - 구동시 오류가 발생하지 않아야 합니다.
+        * 입력된 점수가 없을 경우, RuntimeException을 발생시켜야 합니다.
+    */
     interface Calculator {
         void addScore(String subject, int score);
 
@@ -41,20 +52,28 @@ public class ScoreCalculatorWithList {
     }
 
     static class CalculatorImpl implements Calculator {
-
+        private List<Score> grade = new ArrayList<>();
         @Override
         public void addScore(String subject, int score) {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            grade.add(new Score(subject, score));
+            //throw new RuntimeException("이곳에 코드를 작성하세요.");
         }
 
         @Override
         public double getAverage() {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            if (grade.isEmpty()) {
+                throw new RuntimeException("No scores entered.");
+            }
+            int total = 0;
+            for (Score score : grade) {
+                total += score.getScore();
+            }
+            return (double) total / grade.size();
         }
 
         @Override
         public int getSubjectCount() {
-            throw new RuntimeException("이곳에 코드를 작성하세요.");
+            return grade.size();
         }
     }
 
